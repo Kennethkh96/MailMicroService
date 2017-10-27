@@ -1,7 +1,4 @@
 import * as Nodemailer from 'nodemailer';
-import * as Express from 'express';
-
-let app = Express();
 
 let transporter = Nodemailer.createTransport("SMTP", {
     host: 'smtp.gmail.com',
@@ -29,7 +26,7 @@ let mailOptions = {
     html: body // html body :)
 };
 
-transporter.sendMail(mailOptions, (error, info) => {
+transporter.sendMail(mailOptions, (error: any, info: any) => {
     if (error) {
         return console.log(error);
     }
@@ -40,6 +37,4 @@ transporter.sendMail(mailOptions, (error, info) => {
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 });
-
-app.listen(3000, () => console.log('server started...'));
 

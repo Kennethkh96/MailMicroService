@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Nodemailer = require("nodemailer");
-var Express = require("express");
-var app = Express();
 var transporter = Nodemailer.createTransport("SMTP", {
     host: 'smtp.gmail.com',
     port: 587,
@@ -35,4 +33,3 @@ transporter.sendMail(mailOptions, function (error, info) {
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 });
-app.listen(3000, function () { return console.log('server started...'); });
