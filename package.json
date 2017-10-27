@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "jasmine-node spec"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/Kennethkh96/MailMicroService/issues"
   },
-  "homepage": "https://github.com/Kennethkh96/MailMicroService#readme"
+  "homepage": "https://github.com/Kennethkh96/MailMicroService#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jasmine-node": "^1.14.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.39",
+    "@types/body-parser": "^1.16.5",
+    "@types/jasmine": "^2.6.2",
+    "@types/node": "^8.0.47"
+  }
 }
