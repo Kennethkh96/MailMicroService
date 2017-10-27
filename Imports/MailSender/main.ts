@@ -10,6 +10,7 @@ let transporter = Nodemailer.createTransport("SMTP", {
     }
 
 });
+
 let from = 'BudgetManager" <elitebudgetmanager@gmail.com>';
 let to = "kooogt@gmail.com";
 let subject = "fisk";
