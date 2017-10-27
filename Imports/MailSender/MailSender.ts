@@ -1,26 +1,27 @@
 import * as Nodemailer from 'nodemailer';
 
-let transporter = Nodemailer.createTransport("SMTP", {
+ let transporter = Nodemailer.createTransport( {
     host: 'smtp.gmail.com',
-    port: 587,
+    port: 465,
     secure: true,
     auth: {
         user: 'elitebudgetmanager@gmail.com',
         pass: 'elitebudgetmanager123456789'
     }
 
-});
+}); 
 
+
+export function sendEmail(to: string, subjects: string, text: string) {
+    return '';
+}
 let from = 'BudgetManager" <elitebudgetmanager@gmail.com>';
 let to = "kooogt@gmail.com";
 let subjects = "fisk";
 let text = "Hello world?";
 let body = "<b>Hello world?</b>";
-
-export function sendEmail(to: string, subjects: string, text: string) {
-
-}
 // setup email data with unicode symbols
+/*
 let mailOptions = {
     from: from, // sender address
     to: to, // list of receivers
@@ -28,8 +29,8 @@ let mailOptions = {
     text: text, // plain text body
     html: body // html body :)
 };
-
-transporter.sendMail(mailOptions, (error: any, info: any) => {
+ */
+/* transporter.sendMail(mailOptions, (error: any, info: any) => {
     if (error) {
         return console.log(error);
     }
@@ -39,5 +40,5 @@ transporter.sendMail(mailOptions, (error: any, info: any) => {
 
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-});
+}); */
 
