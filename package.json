@@ -1,0 +1,19 @@
+{
+  "name": "mailmicroservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kennethkh96/MailMicroService.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kennethkh96/MailMicroService/issues"
+  },
+  "homepage": "https://github.com/Kennethkh96/MailMicroService#readme"
+}
