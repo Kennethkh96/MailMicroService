@@ -1,6 +1,7 @@
 import * as Express from 'express';
 import * as BodyParser from 'body-parser';
 import { renderTemplate } from './Imports/MailRenderer/TemplateRenderer';
+import { sendEmail} from './Imports/MailSender/MailSender'
 
 let app = Express();
 
@@ -12,6 +13,7 @@ app.get('/api/sendEmail', (req: any, res: any) => {
     let email = req.body.email;
     let template = req.body.template;
     let compiled = renderTemplate(template);
+    
     
     return null; // REPLACE THIS WITH REAL EMAIL SEND YES
 });
