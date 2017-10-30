@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+      .note {
+          background-color: #fff;
+      }
+      .bold {
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Api documentation</h2>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#sendMail">Send email</a>
+        </h4>
+      </div>
+      <div id="sendMail" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <!-- <strong> -->
+            <ul>
+                <li>Endpoint: /api/sendEmail</li>
+                <li>Method: GET
+                <li>Paramters required: <strong>email, template and api_link</strong></li>
+                <li>email: email address to send the email to</li>
+                <li>template: a string containing the template.</li>
+                <li>api_link: We are gonna send a request to the supplied api_link to retrieve a json object which is used to the template compiling</li>
+                <li><span class="bold">Example:</span><br>
+                    <div class="example">
+                        <p>Template: <pre>"my balance: [[Balance]] and my total count is: [[Total]]"</pre></p>
+                        <p>
+                            Json object: 
+<pre><code>{
+    "Balance": 500,
+    "Total": 200
+}
+</code></pre>
+                        <p>
+                            Compiles to:
+                            <pre>"balance: 500 and my total count is: 200"</pre>
+                        </p>
+                        <pre class="note">Note: we replace the name of the field inside [[ ]] with the value of the matching key in the json object</pre>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+    
+</body>
+</html>

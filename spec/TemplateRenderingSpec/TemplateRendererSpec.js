@@ -5,11 +5,11 @@ var ApiService_1 = require("../../Imports/ApiService/ApiService");
 var dataObject = new ApiService_1.ApiService().getDataObj();
 describe('RenderTemplate', function () {
     it('can render balance tag', function () {
-        var content = TemplateRenderer_1.renderTemplate('balance: [[balance]]');
+        var content = TemplateRenderer_1.renderTemplate('balance: [[balance]]', dataObject);
         expect(content).toBe('balance: ' + dataObject['balance']);
     });
     it('can render name tag', function () {
-        var content = TemplateRenderer_1.renderTemplate('name: [[name]]');
+        var content = TemplateRenderer_1.renderTemplate('name: [[name]]', dataObject);
         expect(content).toBe('name: ' + dataObject['name']);
     });
 });

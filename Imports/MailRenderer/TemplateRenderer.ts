@@ -2,9 +2,10 @@ import { ApiService } from '../ApiService/ApiService';
 
 let service = new ApiService();
 
-export function renderTemplate(content: string)
+export function renderTemplate(content: string, data: any)
 {
-    let data: any = service.getDataObj();
+    if (data === null || data === undefined)
+        return null;
 
     Object.keys(data).forEach((k: string) => {
         let identifier = '[[' + k + ']]';
@@ -12,6 +13,7 @@ export function renderTemplate(content: string)
     });
 
     return content;
+
 }
 
 function replaceAll(str: string, identifier: string, value: string)

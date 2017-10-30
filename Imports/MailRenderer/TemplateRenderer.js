@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var ApiService_1 = require("../ApiService/ApiService");
 var service = new ApiService_1.ApiService();
-function renderTemplate(content) {
-    var data = service.getDataObj();
+function renderTemplate(content, data) {
+    if (data === null || data === undefined)
+        return null;
     Object.keys(data).forEach(function (k) {
         var identifier = '[[' + k + ']]';
         content = replaceAll(content, identifier, data[k]);
