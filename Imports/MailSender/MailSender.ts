@@ -42,3 +42,4 @@ let mailOptions = {
     text: text, // plain text body
     html: body // html body :)
 };
+
