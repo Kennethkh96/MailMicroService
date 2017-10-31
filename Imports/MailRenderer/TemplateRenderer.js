@@ -1,7 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ApiService_1 = require("../ApiService/ApiService");
-var service = new ApiService_1.ApiService();
 function renderTemplate(content, data) {
     if (data === null || data === undefined)
         return null;

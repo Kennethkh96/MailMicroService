@@ -6,6 +6,7 @@ var TemplateRenderer_1 = require("./Imports/MailRenderer/TemplateRenderer");
 var MailSender_1 = require("./Imports/MailSender/MailSender");
 var rp = require("request-promise");
 var app = Express();
+app.set('port', (process.env.PORT || 3000));
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 app.get('/api/sendEmail', function (req, res) {
@@ -30,15 +31,7 @@ app.get('/api/sendEmail', function (req, res) {
         res.status(400).send("something went wrong with the request to the api link");
     });
 });
-app.get('/api/documentation', function (req, resp) {
+app.get('/', function (req, resp) {
     resp.sendFile(__dirname + "/documentation.html");
 });
-app.get('/api/general_information', function (req, res) {
-    var obj = {
-        'name': 'Kenneth',
-        'balance': 100000,
-        'owner': 'Christian'
-    };
-    res.status(200).json(obj);
-});
-app.listen(3000, function () { console.log("listening on port 3000..."); });
+app.listen(app.get('port'), function () { console.log("listening on port " + app.get('port') + " ..."); });

@@ -1,7 +1,3 @@
-import { ApiService } from '../ApiService/ApiService';
-
-let service = new ApiService();
-
 export function renderTemplate(content: string, data: any)
 {
     if (data === null || data === undefined)

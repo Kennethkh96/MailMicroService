@@ -1,7 +1,10 @@
 import { renderTemplate } from '../../Imports/MailRenderer/TemplateRenderer';
-import { ApiService } from '../../Imports/ApiService/ApiService';
 
-let dataObject = new ApiService().getDataObj();
+let dataObject = {
+    'name': 'Kenneth',
+    'balance': 100000,
+    'owner': 'Chr'
+}
 
 describe('RenderTemplate', () => {
     it('can render balance tag', () => {

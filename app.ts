@@ -6,6 +6,8 @@ import * as rp from 'request-promise';
 
 let app = Express();
 
+app.set('port', (process.env.PORT || 3000));
+
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({extended: true}));
 
@@ -38,17 +40,8 @@ app.get('/api/sendEmail', (req: any, res: any) => {
 
 });
 
-app.get('/api/documentation', (req, resp) => {
+app.get('/', (req, resp) => {
     resp.sendFile(__dirname + "/documentation.html");
 });
 
-app.get('/api/general_information', (req: any, res: any) => {
-    let obj = {
-        'name': 'Kenneth',
-        'balance': 100000,
-        'owner': 'Christian'
-    }
-    res.status(200).json(obj);
-});
-
-app.listen(3000, () => {console.log("listening on port 3000...")});
+app.listen(app.get('port'), () => {console.log(`listening on port ${app.get('port')} ...`)});
