@@ -34,4 +34,10 @@ app.get('/api/sendEmail', function (req, res) {
 app.get('/', function (req, resp) {
     resp.sendFile(__dirname + "/documentation.html");
 });
+/*
+// test json object for email test
+app.get('/json', (req, res) => {
+    res.status(200).json({Balance: 25, Total: 21});
+})
+*/
 app.listen(app.get('port'), function () { console.log("listening on port " + app.get('port') + " ..."); });

@@ -9,35 +9,29 @@ let app = Express();
 app.set('port', (process.env.PORT || 3000));
 
 app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({extended: true}));
+app.use(BodyParser.urlencoded({ extended: true }));
 
 
 app.get('/api/sendEmail', (req: any, res: any) => {
     let email = req.query.email;
     let template = req.query.template;
     let apiLink = req.query.api_link;
-    
-    if (email === undefined || template === undefined || apiLink === undefined)
-    {
+
+    if (email === undefined || template === undefined || apiLink === undefined) {
         res.status(400).send("email, template and api_link is required");
         return;
     }
- 
-    let options = { 
-        uri: apiLink,  
+
+    let options = {
+        uri: apiLink,
         json: true,
     }
 
     rp(options)
         .then((response) => {
             let compiled = renderTemplate(template, response);
-            let success = sendEmail(email, "BudgetManager", compiled!);
-            if(success){
-                res.status(200).send("Email sent");
-            }
-            else {
-                res.status(400).send("Email not sent");
-            }
+            sendEmail(email, "BudgetManager", compiled!);
+            res.status(200).send("Email sent");
         })
         .catch(function (err) {
             res.status(400).send("something went wrong with the request to the api link");
@@ -48,5 +42,10 @@ app.get('/api/sendEmail', (req: any, res: any) => {
 app.get('/', (req, resp) => {
     resp.sendFile(__dirname + "/documentation.html");
 });
-
-app.listen(app.get('port'), () => {console.log(`listening on port ${app.get('port')} ...`)});
+/*
+// test json object for email test
+app.get('/json', (req, res) => {
+    res.status(200).json({Balance: 25, Total: 21});
+})
+*/
+app.listen(app.get('port'), () => { console.log(`listening on port ${app.get('port')} ...`) });
