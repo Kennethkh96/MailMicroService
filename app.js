@@ -21,7 +21,7 @@ app.get('/api/sendEmail', function (req, res) {
         uri: apiLink,
         json: true,
     };
-    rp(options)
+    rp(options) 
         .then(function (response) {
         var compiled = TemplateRenderer_1.renderTemplate(template, response);
         MailSender_1.sendEmail(email, "BudgetManager", compiled);
