@@ -24,7 +24,7 @@ app.get('/api/sendEmail', (req: any, res: any) => {
     }
  
     let options = { 
-        uri: apiLink,
+        uri: apiLink, 
         json: true,
     }
 
