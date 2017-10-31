@@ -22,8 +22,8 @@ app.get('/api/sendEmail', (req: any, res: any) => {
         res.status(400).send("email, template and api_link is required");
         return;
     }
-
-    let options = {
+ 
+    let options = { 
         uri: apiLink,
         json: true,
     }
