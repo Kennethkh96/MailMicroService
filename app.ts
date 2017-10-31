@@ -31,8 +31,13 @@ app.get('/api/sendEmail', (req: any, res: any) => {
     rp(options)
         .then((response) => {
             let compiled = renderTemplate(template, response);
-            sendEmail(email, "BudgetManager", compiled!); 
-            res.status(200).send("Email sent");
+            let success = sendEmail(email, "BudgetManager", compiled!);
+            if(success){
+                res.status(200).send("Email sent");
+            }
+            else {
+                res.status(400).send("Email not sent");
+            }
         })
         .catch(function (err) {
             res.status(400).send("something went wrong with the request to the api link");
