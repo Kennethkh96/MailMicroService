@@ -1,7 +1,9 @@
 export function renderTemplate(content: string, data: any)
 {
-    if (data === null || data === undefined)
+    if (data === null || data === undefined || content == undefined || content == null)
         return null;
+
+    data = JSON.parse(data);
 
     Object.keys(data).forEach((k: string) => {
         let identifier = '[[' + k + ']]';

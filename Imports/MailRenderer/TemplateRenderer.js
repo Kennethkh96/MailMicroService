@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function renderTemplate(content, data) {
-    if (data === null || data === undefined)
+    if (data === null || data === undefined || content == undefined || content == null)
         return null;
+    data = JSON.parse(data);
     Object.keys(data).forEach(function (k) {
         var identifier = '[[' + k + ']]';
         content = replaceAll(content, identifier, data[k]);
