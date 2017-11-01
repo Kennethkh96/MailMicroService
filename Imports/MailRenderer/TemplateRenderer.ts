@@ -3,8 +3,19 @@ export function renderTemplate(content: string, data: any)
     if (data === null || data === undefined || content == undefined || content == null)
         return null;
 
-    data = JSON.parse(data);
+    if ((typeof data) === "string")
+    {
+        try 
+        {
+            data = JSON.parse(data);
+        }
+        catch (e)
+        {
+            return null;
+        }
+    }
 
+    console.log(data);
     Object.keys(data).forEach((k: string) => {
         let identifier = '[[' + k + ']]';
         content = replaceAll(content, identifier, data[k]);

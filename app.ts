@@ -33,6 +33,12 @@ app.get('/api/sendEmail', (req: any, res: any) => {
     rp(options)
         .then((response) => {
             let compiled = renderTemplate(template, response);
+            console.log(compiled);
+            if (compiled === null)
+            {
+                res.status(400).send("failed to compile email template because response from api was not valid or template was empty");
+                return;
+            }
             sendEmail(email, "BudgetManager", compiled!);
             log();
             res.status(200).send("Email sent");
@@ -57,7 +63,7 @@ function log() {
         method: "POST",
         json: true
     }
- console.log(options)
+
     rp(options);
 }
 

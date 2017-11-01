@@ -16,4 +16,16 @@ describe('RenderTemplate', () => {
         let content = renderTemplate('name: [[name]]', dataObject);
         expect(content).toBe('name: ' + dataObject['name']);
     });
+
+    it('can render a string of json', () => {
+        let dataobj = JSON.stringify(dataObject);
+        let content = renderTemplate('balance: [[balance]]', dataobj);
+        expect(content).toBe('balance: ' + dataObject['balance']);
+    });
+    it('will not crash if given a bad string of json', () => {
+        let obj = 'test testing';
+        let content = renderTemplate('balance: [[balance]]', obj);
+        console.log(content);
+        expect(content).toBe(null);
+    });
 });
