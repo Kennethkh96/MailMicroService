@@ -1,6 +1,6 @@
 import * as Nodemailer from 'nodemailer';
 
- let transporter = Nodemailer.createTransport( {
+let transporter = Nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
@@ -8,37 +8,38 @@ import * as Nodemailer from 'nodemailer';
         user: 'elitebudgetmanager@gmail.com',
         pass: 'elitebudgetmanager123456789'
     }
+});
 
-}); 
+export function sendEmail(to: string, subject: string, text: string) {
+    mailOptions.from = 'BudgetManager <elitebudgetmanager@gmail.com>';
+    mailOptions.to = to;
+    mailOptions.subject = subject;
+    mailOptions.text = text;
 
 
-export function sendEmail(to: string, subjects: string, text: string) {
-    return '';
+    console.log(to);
+    console.log(subject);
+    console.log(text);
+
+    transporter.sendMail(mailOptions, (error: any, info: any) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+      });
 }
-let from = 'BudgetManager" <elitebudgetmanager@gmail.com>';
-let to = "kooogt@gmail.com";
-let subjects = "fisk";
-let text = "Hello world?";
-let body = "<b>Hello world?</b>";
-// setup email data with unicode symbols
-/*
+
+let from = 'BudgetManager <elitebudgetmanager@gmail.com>';
+let to: string = "";
+let subject: string = "";
+let text: string = "";
+let body: string = "";
+
 let mailOptions = {
-    from: from, // sender address
+    from: 'BudgetManager <elitebudgetmanager@gmail.com>', // sender address
     to: to, // list of receivers
-    subject: subjects, // Subject line
+    subject: subject, // Subject line
     text: text, // plain text body
     html: body // html body :)
 };
- */
-/* transporter.sendMail(mailOptions, (error: any, info: any) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);
-    // Preview only available when sending through an Ethereal account
-    // console.log('Preview URL: %s', Nodemailer.getTestMessageUrl(info)); måske udkommentere senere
-
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-}); */
 

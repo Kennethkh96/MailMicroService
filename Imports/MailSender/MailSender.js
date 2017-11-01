@@ -10,33 +10,31 @@ var transporter = Nodemailer.createTransport({
         pass: 'elitebudgetmanager123456789'
     }
 });
-function sendEmail(to, subjects, text) {
-    return '';
+function sendEmail(to, subject, text) {
+    mailOptions.from = 'BudgetManager <elitebudgetmanager@gmail.com>';
+    mailOptions.to = to;
+    mailOptions.subject = subject;
+    mailOptions.text = text;
+    console.log(to);
+    console.log(subject);
+    console.log(text);
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+    });
 }
 exports.sendEmail = sendEmail;
-var from = 'BudgetManager" <elitebudgetmanager@gmail.com>';
-var to = "kooogt@gmail.com";
-var subjects = "fisk";
-var text = "Hello world?";
-var body = "<b>Hello world?</b>";
-// setup email data with unicode symbols
-/*
-let mailOptions = {
-    from: from, // sender address
-    to: to, // list of receivers
-    subject: subjects, // Subject line
-    text: text, // plain text body
+var from = 'BudgetManager <elitebudgetmanager@gmail.com>';
+var to = "";
+var subject = "";
+var text = "";
+var body = "";
+var mailOptions = {
+    from: 'BudgetManager <elitebudgetmanager@gmail.com>',
+    to: to,
+    subject: subject,
+    text: text,
     html: body // html body :)
 };
- */
-/* transporter.sendMail(mailOptions, (error: any, info: any) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);
-    // Preview only available when sending through an Ethereal account
-    // console.log('Preview URL: %s', Nodemailer.getTestMessageUrl(info)); måske udkommentere senere
-
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-}); */
