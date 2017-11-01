@@ -8,7 +8,7 @@ export function renderTemplate(content: string, data: any)
         content = replaceAll(content, identifier, data[k]);
     });
 
-    return content;
+    return content; 
 
 }
 
