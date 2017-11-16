@@ -12,8 +12,8 @@ function renderTemplate(content, data) {
         }
     }
     console.log(data);
-    Object.keys(data).forEach(function (k) {
-        var identifier = '[[' + k + ']]';
+    Object.keys(data).forEach((k) => {
+        let identifier = '[[' + k + ']]';
         content = replaceAll(content, identifier, data[k]);
     });
     return content;

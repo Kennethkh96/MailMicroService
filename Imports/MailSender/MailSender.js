@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Nodemailer = require("nodemailer");
-var transporter = Nodemailer.createTransport({
+const Nodemailer = require("nodemailer");
+let transporter = Nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
@@ -18,7 +18,7 @@ function sendEmail(to, subject, text) {
     console.log(to);
     console.log(subject);
     console.log(text);
-    transporter.sendMail(mailOptions, function (error, info) {
+    transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             return console.log(error);
         }
@@ -26,12 +26,12 @@ function sendEmail(to, subject, text) {
     });
 }
 exports.sendEmail = sendEmail;
-var from = 'BudgetManager <elitebudgetmanager@gmail.com>';
-var to = "";
-var subject = "";
-var text = "";
-var body = "";
-var mailOptions = {
+let from = 'BudgetManager <elitebudgetmanager@gmail.com>';
+let to = "";
+let subject = "";
+let text = "";
+let body = "";
+let mailOptions = {
     from: 'BudgetManager <elitebudgetmanager@gmail.com>',
     to: to,
     subject: subject,
