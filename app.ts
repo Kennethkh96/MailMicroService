@@ -13,9 +13,9 @@ app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 
 
-app.get('/', (req, resp) => {
-    resp.sendFile(__dirname + "/documentation.html");
-});
+// app.get('/', (req, resp) => {
+//     resp.sendFile(__dirname + "/documentation.html");
+// });
 //Recieve from Heroku master
 amqp.connect('amqp://1doFhxuC:WGgk9kXy_wFIFEO0gwB_JiDuZm2-PrlO@black-ragwort-810.bigwig.lshift.net:10803/SDU53lDhKShK', function (err, conn) {
     conn.createChannel(function (err, ch) {
@@ -35,7 +35,7 @@ amqp.connect('amqp://1doFhxuC:WGgk9kXy_wFIFEO0gwB_JiDuZm2-PrlO@black-ragwort-810
                     console.log("after Data parsed");        
                 }
                 catch (e) {
-                    return;
+                    console.log(e);
                 }
                 console.log(data)             
                 CompileAndSendEmail(data.template, data.email, data.data);
@@ -51,7 +51,7 @@ function log(email: string) {
         info: "An email was sent to " + email,
         apikey: apikey
     }
-
+    console.log("Er inde i loggen")
     amqp.connect('amqp://1doFhxuC:WGgk9kXy_wFIFEO0gwB_JiDuZm2-PrlO@black-ragwort-810.bigwig.lshift.net:10802/SDU53lDhKShK', function (err, conn) {
         conn.createChannel(function (err, ch) {
             let ex = 'Rapid';
@@ -60,33 +60,22 @@ function log(email: string) {
             ch.assertExchange(ex, 'direct', { durable: false });
             ch.publish(ex, 'logtag', new Buffer(msg));
             console.log(" [x] Sent %s: '%s'", msg);
+            setTimeout(function () { conn.close(); }, 500);
         });
-
-        setTimeout(function () { conn.close(); process.exit(0) }, 500);
+       
     });
-
-    // let apikey = "tuEbeO8eYn-6K2N1yBwUS-Pq3HUhBrWA";
-
-    // let options = {
-    //     uri: "http://10.152.121.22:3000/api/log?",
-    //     form: { information: information, api_key: apikey },
-    //     method: "POST",
-    //     json: true
-    // }
-
-    // rp(options);
 }
-app.get('/api/sendEmail', (req: any, res: any) => {
-    let email = req.query.email;
-    let template = req.query.template;
-    let apiLink = req.query.api_link;
+// app.get('/api/sendEmail', (req: any, res: any) => {
+//     let email = req.query.email;
+//     let template = req.query.template;
+//     let apiLink = req.query.api_link;
 
-    if (email === undefined || template === undefined || apiLink === undefined) {
-        res.status(400).send("email, template and api_link is required");
-        return;
-    }
-    CompileAndSendEmail(template, email, apiLink);
-});
+//     if (email === undefined || template === undefined || apiLink === undefined) {
+//         res.status(400).send("email, template and api_link is required");
+//         return;
+//     }
+//     CompileAndSendEmail(template, email, apiLink);
+// });
 //Send emailconfirmation to Heroku Master
 function emailConfirmation(confirmation: any){
     amqp.connect('amqp://1doFhxuC:WGgk9kXy_wFIFEO0gwB_JiDuZm2-PrlO@black-ragwort-810.bigwig.lshift.net:10802/SDU53lDhKShK', function(err, conn) {
@@ -98,9 +87,9 @@ function emailConfirmation(confirmation: any){
           ch.assertExchange(ex, 'direct', {durable: false});
           ch.publish(ex, 'mailconfirmation', new Buffer("" + msg)); //ex = den exchange vi vil publish til, mail er det tag som vi vil ramme
                 console.log(" [x] Sent %s: '%s'", msg);
+                setTimeout(function() { conn.close(); }, 500);
         });
       
-        setTimeout(function() { conn.close(); process.exit(0) }, 500);
       });
 }
 function CompileAndSendEmail(template: string, email: string, data: JSON) {
@@ -117,23 +106,14 @@ function CompileAndSendEmail(template: string, email: string, data: JSON) {
         let compiled = renderTemplate(template, data);
         console.log(compiled);
         if (compiled === null) {
-            /* res.status(400).send("failed to compile email template because response from api was not valid or template was empty"); */
+           
             emailConfirmation(fail)
             return false;
         }
         sendEmail(email, "BudgetManager", compiled);
         emailConfirmation(ok)
         log(email);
-        return true;
-        /* res.status(200).send("Email sent"); */
-    
-
-   
+        return true;  
 }
-
-// test json object for email test
-app.get('/json', (req, res) => {
-    res.status(200).json({ Balance: 25, Total: 21 });
-})
 
 app.listen(app.get('port'), () => { console.log(`listening on port ${app.get('port')} ...`) });
